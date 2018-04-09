@@ -10,7 +10,7 @@ addpath(['.' filesep 'VLC_param' filesep 'LED Parameters' filesep]);
 
 load VLC_param01.mat;
 
-SNR = pow2db(30);
+SNR = db2pow(30);
 numberOfBits = 2;
 numberOfSymbols = 2^numberOfBits;
 numberOfSymbolsInBlock = 100;
