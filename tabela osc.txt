@@ -1,0 +1,12 @@
+50ns >=T<= 20us - 2GSa/s
+20us > T <= 50us - 1GSa/s
+50us > T <= 100us - 500MSa/s
+100us > T <= 200us - 250MSa/s
+200us > T <= 500us - 100MSa/s
+500us > T <= 1ms - 50MSa/s
+1ms > T <= 2ms - 25MSa/s
+2ms > T <= 5ms - 10MSa/s
+5ms > T <= 10ms - 5MSa/s
+
+
+

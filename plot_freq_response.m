@@ -2,167 +2,37 @@ clear;
 clc;
 close all
 
+if isunix
+    addpath('/home/felipe/Dropbox/VLC_exp/data/freq_resp');
+    addpath('/home/felipe.silva/Dropbox/VLC_exp/data/freq_resp');
+else
+    addpath('C:\Users\Felipe Barboza\Dropbox\VLC_exp\data\freq_resp');
+end
 %MI_1 = 0.05
 %MI_2 = 0.075
 %MI_3 = 0.1
 
-%VDC_1 = 2.8
-%VDC_2 = 3
+%VDC_1 = 3.4
+%VDC_2 = 3.5
+%VDC_3 = 3.6
+%VDC_4 = 3.1
+
+data_MI_1_VDC_1 = load('MI0.05_340mvpp_3.4V.mat');
+data_MI_1_VDC_2 = load('MI0.05_510mvpp_3.5V.mat');
+data_MI_1_VDC_3 = load('MI0.05_680mvpp_3.6V.mat');
+data_MI_1_VDC_4 = load('MI0.05_465mvpp_3.1V.mat');
 
 
-data_MI_1_VDC_1 = [159
-145
-130
-115
-100
-86
-74
-64
-56
-47
-42
-37
-33
-29
-26
-23
-21
-19
-18
-16
-15]*1e-3;
+data_MI_2_VDC_1 = load('MI0.075_350mvpp_3.4V.mat');
+data_MI_2_VDC_2 = load('MI0.075_525mvpp_3.5V.mat');
+data_MI_2_VDC_3 = load('MI0.075_700mvpp_3.6V.mat');
+data_MI_2_VDC_4 = load('MI0.075_620mvpp_3.1V.mat');
 
-data_MI_1_VDC_2 = [165
-159
-145
-130
-116
-102
-89
-79
-70
-62
-55
-49
-45
-40
-37
-34
-31
-29
-26
-25
-22]*1e-3;
 
-data_MI_2_VDC_1 = [221
-203
-185
-165
-145
-127
-110
-95
-82
-72
-64
-57
-50
-45
-40
-36
-33
-30
-28
-25
-23]*1e-3;
-
-data_MI_2_VDC_2 = [264
-241
-218
-195
-171
-150
-132
-116
-104
-93
-83
-74
-67
-61
-56
-50
-46
-43
-40
-37
-34]*1e-3;
-
-data_MI_3_VDC_1 = [274
-252
-230
-208
-185
-160
-140
-123
-107
-94
-83
-73
-65
-59
-53
-48
-44
-40
-37
-33
-31]*1e-3;
-
-data_MI_3_VDC_2 = [347
-316
-286
-256
-227
-200
-176
-155
-137
-123
-110
-98
-89
-81
-74
-67
-61
-56
-52
-48
-45]*1e-3;
-
-f = [0.2
-0.5
-1
-1.5
-2
-2.5
-3
-3.5
-4
-4.5
-5
-5.5
-6
-6.5
-7
-7.5
-8
-8.5
-9
-9.5
-10]*1e6;
+data_MI_3_VDC_1 = load('MI0.1_360mvpp_3.4V.mat');
+data_MI_3_VDC_2 = load('MI0.1_540mvpp_3.5V.mat');
+data_MI_3_VDC_3 = load('MI0.1_720mvpp_3.6V.mat');
+data_MI_3_VDC_4 = load('MI0.1_310mvpp_3.1V.mat');
 
 
 
@@ -211,32 +81,79 @@ ylabel('Amplitude (dB)','interpreter','latex');
 H = legend('Blue Channel','White Channel');
 set(H,'interpreter','latex')
 
+f = data_MI_1_VDC_1.freq;
 
 
-data_MI_1_VDC_1_aux = interp1(f, data_MI_1_VDC_1, w);%interpolated frequency response
-data_MI_1_VDC_2_aux = interp1(f, data_MI_1_VDC_2, w);%interpolated frequency response
-data_MI_2_VDC_1_aux = interp1(f, data_MI_2_VDC_1, w);%interpolated frequency response
-data_MI_2_VDC_2_aux = interp1(f, data_MI_2_VDC_2, w);%interpolated frequency response
-data_MI_3_VDC_1_aux = interp1(f, data_MI_3_VDC_1, w);%interpolated frequency response
-data_MI_3_VDC_2_aux = interp1(f, data_MI_3_VDC_2, w);%interpolated frequency response
+data_MI_1_VDC_1_aux = interp1(f, data_MI_1_VDC_1.Amplitude, w);%interpolated frequency response
+data_MI_1_VDC_2_aux = interp1(f, data_MI_1_VDC_2.Amplitude, w);%interpolated frequency response
+data_MI_1_VDC_3_aux = interp1(f, data_MI_1_VDC_3.Amplitude, w);%interpolated frequency response
+data_MI_1_VDC_4_aux = interp1(f, data_MI_1_VDC_4.Amplitude, w);%interpolated frequency response
 
-% figure
-% plot(f,(data_MI_1_VDC_1/max(data_MI_1_VDC_1)))
-% hold on
-% plot(w,(data_MI_1_VDC_1_aux/max(data_MI_1_VDC_1_aux)))
+data_MI_2_VDC_1_aux = interp1(f, data_MI_2_VDC_1.Amplitude, w);%interpolated frequency response
+data_MI_2_VDC_2_aux = interp1(f, data_MI_2_VDC_2.Amplitude, w);%interpolated frequency response
+data_MI_2_VDC_3_aux = interp1(f, data_MI_2_VDC_3.Amplitude, w);%interpolated frequency response
+data_MI_2_VDC_4_aux = interp1(f, data_MI_2_VDC_4.Amplitude, w);%interpolated frequency response
+
+data_MI_3_VDC_1_aux = interp1(f, data_MI_3_VDC_1.Amplitude, w);%interpolated frequency response
+data_MI_3_VDC_2_aux = interp1(f, data_MI_3_VDC_2.Amplitude, w);%interpolated frequency response
+data_MI_3_VDC_3_aux = interp1(f, data_MI_3_VDC_3.Amplitude, w);%interpolated frequency response
+data_MI_3_VDC_4_aux = interp1(f, data_MI_3_VDC_4.Amplitude, w);%interpolated frequency response
+
+
+figure;
+plot(f,(data_MI_1_VDC_4.Amplitude/max(data_MI_1_VDC_4.Amplitude)))
+hold on
+plot(f,(data_MI_2_VDC_4.Amplitude/max(data_MI_2_VDC_4.Amplitude)))
+plot(f,(data_MI_3_VDC_4.Amplitude/max(data_MI_3_VDC_4.Amplitude)))
+plot(w,(Gw));
+
+H = legend('MI = 0.05, VDC = 3.1','MI = 0.075, VDC = 3.1',...
+    'MI = 0.1, VDC = 3.1','Model');
+
+set(H,'interpreter','latex')
+xlim([min(w) max(w)]);
+
+
+
+figure
+plot(f,(data_MI_1_VDC_1.Amplitude/max(data_MI_1_VDC_1.Amplitude)))
+hold on
+plot(f,(data_MI_1_VDC_2.Amplitude/max(data_MI_1_VDC_2.Amplitude)))
+plot(f,(data_MI_1_VDC_3.Amplitude/max(data_MI_1_VDC_3.Amplitude)))
+plot(f,(data_MI_2_VDC_1.Amplitude/max(data_MI_2_VDC_1.Amplitude)))
+plot(f,(data_MI_2_VDC_2.Amplitude/max(data_MI_2_VDC_2.Amplitude)))
+plot(f,(data_MI_2_VDC_3.Amplitude/max(data_MI_2_VDC_3.Amplitude)))
+plot(f,(data_MI_3_VDC_1.Amplitude/max(data_MI_3_VDC_1.Amplitude)))
+plot(f,(data_MI_3_VDC_2.Amplitude/max(data_MI_3_VDC_2.Amplitude)))
+plot(f,(data_MI_3_VDC_3.Amplitude/max(data_MI_3_VDC_3.Amplitude)))
+plot(w,(Gw));
+
+H = legend('MI = 0.05, VDC = 3.4','MI = 0.05, VDC = 3.5',...
+    'MI = 0.05, VDC = 3.6','MI = 0.075, VDC = 3.4','MI = 0.075, VDC = 3.5'...
+    ,'MI = 0.075, VDC = 3.6','MI = 0.1, VDC = 3.4','MI = 0.1, VDC = 3.5',...
+    'MI = 0.1, VDC = 3.6','Model');
+
+set(H,'interpreter','latex')
+xlim([min(w) max(w)]);
+
 
 figure
 plot(w,(data_MI_1_VDC_1_aux/max(data_MI_1_VDC_1_aux)))
 hold on
 plot(w,(data_MI_1_VDC_2_aux/max(data_MI_1_VDC_2_aux)))
+plot(w,(data_MI_1_VDC_3_aux/max(data_MI_1_VDC_3_aux)))
 plot(w,(data_MI_2_VDC_1_aux/max(data_MI_2_VDC_1_aux)))
 plot(w,(data_MI_2_VDC_2_aux/max(data_MI_2_VDC_2_aux)))
+plot(w,(data_MI_2_VDC_3_aux/max(data_MI_2_VDC_3_aux)))
 plot(w,(data_MI_3_VDC_1_aux/max(data_MI_3_VDC_1_aux)))
 plot(w,(data_MI_3_VDC_2_aux/max(data_MI_3_VDC_2_aux)))
+plot(w,(data_MI_3_VDC_3_aux/max(data_MI_3_VDC_3_aux)))
 plot(w,(Gw));
 
-H = legend('MI = 0.05, VDC = 2.8','MI = 0.05, VDC = 3',...
-    'MI = 0.075, VDC = 2.8','MI = 0.075, VDC = 3','MI = 0.1, VDC = 2.8','MI = 0.1, VDC = 3','Model');
+H = legend('MI = 0.05, VDC = 3.4','MI = 0.05, VDC = 3.5',...
+    'MI = 0.05, VDC = 3.6','MI = 0.075, VDC = 3.4','MI = 0.075, VDC = 3.5'...
+    ,'MI = 0.075, VDC = 3.6','MI = 0.1, VDC = 3.4','MI = 0.1, VDC = 3.5',...
+    'MI = 0.1, VDC = 3.6','Model');
 
 set(H,'interpreter','latex')
 xlim([min(w) max(w)]);
@@ -245,19 +162,29 @@ figure
 plot(w,10*log10(data_MI_1_VDC_1_aux/max(data_MI_1_VDC_1_aux)))
 hold on
 plot(w,10*log10(data_MI_1_VDC_2_aux/max(data_MI_1_VDC_2_aux)))
+plot(w,10*log10(data_MI_1_VDC_3_aux/max(data_MI_1_VDC_3_aux)))
 plot(w,10*log10(data_MI_2_VDC_1_aux/max(data_MI_2_VDC_1_aux)))
 plot(w,10*log10(data_MI_2_VDC_2_aux/max(data_MI_2_VDC_2_aux)))
+plot(w,10*log10(data_MI_2_VDC_3_aux/max(data_MI_2_VDC_3_aux)))
 plot(w,10*log10(data_MI_3_VDC_1_aux/max(data_MI_3_VDC_1_aux)))
 plot(w,10*log10(data_MI_3_VDC_2_aux/max(data_MI_3_VDC_2_aux)))
+plot(w,10*log10(data_MI_3_VDC_3_aux/max(data_MI_3_VDC_3_aux)))
 plot(w,10*log10(Gw));
 
-H = legend('MI = 0.05, VDC = 2.8','MI = 0.05, VDC = 3',...
-    'MI = 0.075, VDC = 2.8','MI = 0.075, VDC = 3','MI = 0.1, VDC = 2.8','MI = 0.1, VDC = 3','Model');
+H = legend('MI = 0.05, VDC = 3.4','MI = 0.05, VDC = 3.5',...
+    'MI = 0.05, VDC = 3.6','MI = 0.075, VDC = 3.4','MI = 0.075, VDC = 3.5'...
+    ,'MI = 0.075, VDC = 3.6','MI = 0.1, VDC = 3.4','MI = 0.1, VDC = 3.5',...
+    'MI = 0.1, VDC = 3.6','Model');
 
 set(H,'interpreter','latex','Location','Best')
 xlim([min(w) max(w)]);
 
-
+if isunix
+    rmpath('/home/felipe/Dropbox/VLC_exp/data/freq_resp');
+    rmpath('/home/felipe.silva/Dropbox/VLC_exp/data/freq_resp');
+else
+    rmpath('C:\Users\Felipe Barboza\Dropbox\VLC_exp\data\freq_resp');
+end
 
 
 
